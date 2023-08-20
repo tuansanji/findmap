@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Nearest Buildings</title>
+  </head>
+  <body>
+    <h1>Find Nearest Buildings</h1>
+    <label for="locationInput"
+      >Enter Location (Google Maps Link or Coordinates):</label
+    >
+    <input type="text" id="locationInput" />
+    <button onclick="findNearestBuildings()">Find Nearest Buildings</button>
+    <div id="result"></div>
+
+    <script>
+      // Hàm tính khoảng cách giữa hai điểm dựa trên tọa độ
+      function calculateDistance(coord1, coord2) {
+        // Giống hàm calculateDistance trong ví dụ trước
+
+        return distance;
+      }
+
+      // Hàm sắp xếp danh sách tòa nhà theo khoảng cách
+      function sortBuildingsByDistance(customerLocation, buildings) {
+        // Giống hàm sortBuildingsByDistance trong ví dụ trước
+
+        return sortedBuildings;
+      }
+
+      function findNearestBuildings() {
+        const locationInput = document.getElementById("locationInput").value;
+
+        // Xử lý dữ liệu nhập vào (có thể là link Google Maps hoặc tọa độ)
+        let customerLocation;
+        if (locationInput.includes("google.com/maps")) {
+          // Xử lý link Google Maps để trích xuất tọa độ
+          // Ví dụ: "https://www.google.com/maps/place/LATITUDE,LONGITUDE"
+          const match = locationInput.match(/@([-0-9.]+),([-0-9.]+)/);
+          if (match) {
+            const latitude = parseFloat(match[1]);
+            const longitude = parseFloat(match[2]);
+            customerLocation = [latitude, longitude];
+          } else {
+            alert("Invalid Google Maps link format");
+            return;
+          }
+        } else {
+          // Xử lý tọa độ được nhập trực tiếp
+          const coords = locationInput.split(",");
+          if (coords.length !== 2) {
+            alert("Invalid coordinates format");
+            return;
+          }
+          const latitude = parseFloat(coords[0]);
+          const longitude = parseFloat(coords[1]);
+          customerLocation = [latitude, longitude];
+        }
+
+        // Danh sách tòa nhà (thay bằng dữ liệu thật của bạn)
+        const buildings = [
+          {
+            name: "Building A",
+            location: [24.614302, 46.757561],
+            image: "../img/1.jpeg",
+          },
+          {
+            name: "Building B",
+            location: [24.802599, 46.795124],
+            image: "../img/2.jpeg",
+          },
+          {
+            name: "Building C",
+            location: [24.824713, 46.635332],
+            image: "../img/2.jpeg",
+          },
+          // Thêm các tòa nhà khác
+        ];
+
+        const sortedBuildings = sortBuildingsByDistance(
+          customerLocation,
+          buildings
+        );
+
+        // Hiển thị kết quả
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "<h2>Nearest Buildings:</h2>";
+        for (const building of sortedBuildings) {
+          const distance = calculateDistance(
+            customerLocation,
+            building.location
+          );
+          resultDiv.innerHTML += `
+                    <div>
+                        <h3>${building.name}</h3>
+                        <p>Distance: ${distance.toFixed(2)} km</p>
+                        <p>Location: <a href="${locationToGoogleMapsLink(
+                          building.location
+                        )}">View on Google Maps</a></p>
+                        <img src="${building.image}" alt="${
+            building.name
+          }" width="200">
+                    </div>
+                `;
+        }
+      }
+
+      function locationToGoogleMapsLink(location) {
+        return `https://www.google.com/maps/place/${location[0]},${location[1]}`;
+      }
+    </script>
+  </body>
+</html>
