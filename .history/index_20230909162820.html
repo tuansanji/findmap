@@ -17,7 +17,7 @@
       style="width: 500px; height: 100px"
     />
     <button onclick="findNearestBuildings()">Find Nearest Buildings</button>
-    <div id="result" style="display: flex; flex-wrap: wrap"></div>
+    <div id="result"></div>
 
     <script>
       // Xử lý sự kiện nhấn phím Enter trong ô input
@@ -440,7 +440,7 @@
             building.location
           );
           resultDiv.innerHTML += `
-  <div style="border: 1px solid #333;    display: flex; flex-basis: calc(25% - 20px); margin-right: 20px; align-items: center; justify-content: space-between; margin-bottom: 20px;flex-direction: column-reverse;">
+  <div style="display: flex; flex-basis: calc(25% - 20px); margin-right: 20px; align-items: center; justify-content: space-between; margin-bottom: 20px;">
     <h3>${building.name}</h3>
     <p>Distance: ${distance.toFixed(2)} km</p>
     <p>Location: <a target="_blank" href="${locationToGoogleMapsLink(
