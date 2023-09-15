@@ -10,17 +10,22 @@
     <label for="locationInput"
       >Enter Location (Google Maps Link or Coordinates):</label
     >
-    <input type="text" id="locationInput" />
+    <input
+      type="text"
+      id="locationInput"
+      onkeydown="handleInputKeyDown(event)"
+      style="width: 500px; height: 100px"
+    />
     <button onclick="findNearestBuildings()">Find Nearest Buildings</button>
-    <div id="result"></div>
+    <div id="result" style="display: flex; flex-wrap: wrap"></div>
 
     <script>
-      // Hàm tính khoảng cách giữa hai điểm dựa trên tọa độ
-      //   function calculateDistance(coord1, coord2) {
-      //     // Giống hàm calculateDistance trong ví dụ trước
-
-      //     return distance;
-      //   }
+      // Xử lý sự kiện nhấn phím Enter trong ô input
+      function handleInputKeyDown(event) {
+        if (event.key === "Enter") {
+          findNearestBuildings();
+        }
+      }
 
       // Hàm tính khoảng cách giữa hai điểm dựa trên tọa độ
       function calculateDistance(coord1, coord2) {
@@ -194,6 +199,42 @@
             location: [24.637366, 46.57121],
             image: "../img/22.jpeg",
           },
+          {
+            name: "riyadh arabic mới",
+            location: [24.7991295, 46.6856117],
+            image: "../img/61.jpeg",
+          },
+          {
+            name: "Open 300/600 🇨🇳Arabic 500/1000 🇸🇦",
+            location: [24.6373653, 46.5686341],
+            image: "../img/62.jpeg",
+          },
+          {
+            name: "riyadh map việt 250",
+            location: [24.815424, 46.780002],
+            image: "../img/22.jpeg",
+          },
+          {
+            name: "RIYADH Open 300/600",
+            location: [24.7409096, 46.8348503],
+            image: "../img/54.jpeg",
+          },
+          {
+            name: "RIYADH Open 300/600",
+            location: [24.5911446, 46.5914993],
+            image: "../img/55.jpeg",
+          },
+          {
+            name: "    Open 300/600 🇻🇳🇻🇳",
+            location: [24.7558804, 46.7999039],
+            image: "../img/56.jpeg",
+          },
+          
+          {
+            name: "    Open 300/600 🇻🇳🇻🇳",
+            location: [24.7832661,46.6595612],
+            image: "../img/63.jpeg",
+          },
           //   saudi location
           {
             name: "abha 23",
@@ -219,6 +260,12 @@
           },
 
           {
+            name: " Khobar 🇨🇳Arab 600/1000 🇸🇦",
+            location: [26.2930832, 50.1911163],
+            image: "../img/51.jpeg",
+          },
+
+          {
             name: "khobar 27",
             location: [26.286106, 50.207184],
             image: "../img/27.jpeg",
@@ -235,7 +282,11 @@
             location: [26.29373, 50.178825],
             image: "../img/29.jpeg",
           },
-
+          {
+            name: "khobar 50",
+            location: [26.3015137, 50.1956864],
+            image: "../img/50.jpeg",
+          },
           {
             name: "saudi 30",
             location: [26.295513, 50.176457],
@@ -259,11 +310,20 @@
             location: [21.517334, 39.161301],
             image: "../img/33.jpeg",
           },
-
+          {
+            name: "jeddah 52",
+            location: [21.620813, 39.191269],
+            image: "../img/52.jpeg",
+          },
           {
             name: "jeddah 34",
             location: [21.617884, 39.189342],
             image: "../img/34.jpeg",
+          },
+          {
+            name: "jeddah 53",
+            location: [21.584362, 39.1601028],
+            image: "../img/53.jpeg",
           },
 
           {
@@ -307,13 +367,26 @@
             location: [26.283901, 50.20348],
             image: "../img/41.jpeg",
           },
-
+          {
+            name: "Khobar Open Arabic 600/1200 Ass 800/1",
+            location: [26.2911396, 50.1802445],
+            image: "../img/58.jpeg",
+          },
           {
             name: "jeddah 42",
             location: [21.516012, 39.159382],
             image: "../img/42.jpeg",
           },
-
+          {
+            name: "Jeddah Open 300/600 Ass 600-1🇨🇳Arab 600/1000 Ass 800-1",
+            location: [21.5682201, 39.1749878],
+            image: "../img/60.jpeg",
+          },
+          {
+            name: "jeddah 42",
+            location: [21.5202274, 39.1565972],
+            image: "../img/59.jpeg",
+          },
           {
             name: "jeddah 43",
             location: [21.593284, 39.155973],
@@ -337,7 +410,26 @@
             location: [21.525054, 39.178978],
             image: "../img/46.jpeg",
           },
-
+          {
+            name: "khobar 47",
+            location: [26.2720528, 50.2155113],
+            image: "../img/47.jpeg",
+          },
+          {
+            name: "jeddah 48",
+            location: [21.488344, 39.226261],
+            image: "../img/48.jpeg",
+          },
+          {
+            name: "riyadh 49",
+            location: [24.7092247, 46.6703377],
+            image: "../img/49.jpeg",
+          },
+          {
+            name: "Jeddah Open 300/600 🇨🇳",
+            location: [21.5683861, 39.1750298],
+            image: "../img/57.jpeg",
+          },
           // Thêm các tòa nhà khác
         ];
         const sortedBuildings = sortBuildingsByDistance(
@@ -353,19 +445,18 @@
             customerLocation,
             building.location
           );
-          resultDiv.innerHTML += html`
-            <div style="display:flex">
-              <h3>${building.name}</h3>
-              <p>Distance: ${distance.toFixed(2)} km</p>
-              <p>
-                Location:
-                <a href="${locationToGoogleMapsLink(building.location)}"
-                  >View on Google Maps</a
-                >
-              </p>
-              <img src="${building.image}" alt="${building.name}" width="200" />
-            </div>
-          `;
+          resultDiv.innerHTML += `
+  <div style="border: 1px solid #333;    display: flex; flex-basis: calc(25% - 20px); margin-right: 20px; align-items: center; justify-content: space-between; margin-bottom: 20px;flex-direction: column-reverse;">
+    <h3>${building.name}</h3>
+    <p>Distance: ${distance.toFixed(2)} km</p>
+    <p>Location: <a target="_blank" href="${locationToGoogleMapsLink(
+      building.location
+    )}">View on Google Maps</a></p>
+    <img src="${building.image}" alt="${
+            building.name
+          }" width="200" height="300" />
+  </div>
+`;
         }
       }
 
