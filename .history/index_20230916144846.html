@@ -487,7 +487,9 @@
       <div style="border: 1px solid #333; display: flex; flex-basis: calc(25% - 20px); margin-right: 20px; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-direction: column-reverse;">
         <h3>${building.name}</h3>
         <p>Distance: ${distance.toFixed(2)} km</p>
-      
+        <p>Location: <a target="_blank" href="${locationToGoogleMapsLink(
+          building.location
+        )}">View on Google Maps</a></p>
         <img src="${building.image}" alt="${
             building.name
           }" width="200" height="200" />
@@ -495,9 +497,7 @@
     `;
         }
       }
-      // <p>Location: <a target="_blank" href="${locationToGoogleMapsLink(
-      //     building.location
-      //   )}">View on Google Maps</a></p>
+
       function locationToGoogleMapsLink(location) {
         return `https://www.google.com/maps/place/${location[0]},${location[1]}`;
       }

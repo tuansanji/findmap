@@ -6,13 +6,13 @@
     <title>Find Nearest Buildings</title>
   </head>
   <body>
-    <button
+    <!-- <button
       onclick="scrollToTop()"
       id="backToTopBtn"
       style="position: fixed; bottom: 30px; right: 30px"
     >
       back to top
-    </button>
+    </button> -->
     <h1>Find Nearest Buildings</h1>
     <label for="locationInput"
       >Enter Location (Google Maps Link or Coordinates):</label
@@ -27,19 +27,19 @@
     <div id="result" style="display: flex; flex-wrap: wrap"></div>
 
     <script>
-      // Function to scroll the page back to the top
-      function scrollToTop() {
-        const scrollDuration = 500; // Duration of the scroll animation in milliseconds
-        const scrollStep = -window.scrollY / (scrollDuration / 15);
+      // // Function to scroll the page back to the top
+      // function scrollToTop() {
+      //   const scrollDuration = 500; // Duration of the scroll animation in milliseconds
+      //   const scrollStep = -window.scrollY / (scrollDuration / 15);
 
-        const scrollInterval = setInterval(function () {
-          if (window.scrollY !== 0) {
-            window.scrollBy(0, scrollStep);
-          } else {
-            clearInterval(scrollInterval);
-          }
-        }, 15);
-      }
+      //   const scrollInterval = setInterval(function () {
+      //     if (window.scrollY !== 0) {
+      //       window.scrollBy(0, scrollStep);
+      //     } else {
+      //       clearInterval(scrollInterval);
+      //     }
+      //   }, 15);
+      // }
 
       // Xử lý sự kiện nhấn phím Enter trong ô input
       function handleInputKeyDown(event) {
@@ -465,7 +465,6 @@
           },
           // Thêm các tòa nhà khác
         ];
-
         const sortedBuildings = sortBuildingsByDistance(
           customerLocation,
           buildings
@@ -473,31 +472,27 @@
 
         // Hiển thị kết quả
         const resultDiv = document.getElementById("result");
-        resultDiv.innerHTML = "";
-
-        // Giới hạn hiển thị chỉ 15 kết quả
-        const maxResults = 30;
-        for (let i = 0; i < Math.min(maxResults, sortedBuildings.length); i++) {
-          const building = sortedBuildings[i];
+        // resultDiv.innerHTML = "<h2>Nearest Buildings:</h2>";
+        for (const building of sortedBuildings) {
           const distance = calculateDistance(
             customerLocation,
             building.location
           );
           resultDiv.innerHTML += `
-      <div style="border: 1px solid #333; display: flex; flex-basis: calc(25% - 20px); margin-right: 20px; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-direction: column-reverse;">
-        <h3>${building.name}</h3>
-        <p>Distance: ${distance.toFixed(2)} km</p>
-      
-        <img src="${building.image}" alt="${
+  <div style="border: 1px solid #333;    display: flex; flex-basis: calc(25% - 20px); margin-right: 20px; align-items: center; justify-content: space-between; margin-bottom: 20px;flex-direction: column-reverse;">
+    <h3>${building.name}</h3>
+    <p>Distance: ${distance.toFixed(2)} km</p>
+    <p>Location: <a target="_blank" href="${locationToGoogleMapsLink(
+      building.location
+    )}">View on Google Maps</a></p>
+    <img src="${building.image}" alt="${
             building.name
-          }" width="200" height="200" />
-      </div>
-    `;
+          }" width="200" height="300" />
+  </div>
+`;
         }
       }
-      // <p>Location: <a target="_blank" href="${locationToGoogleMapsLink(
-      //     building.location
-      //   )}">View on Google Maps</a></p>
+
       function locationToGoogleMapsLink(location) {
         return `https://www.google.com/maps/place/${location[0]},${location[1]}`;
       }
