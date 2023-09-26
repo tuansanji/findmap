@@ -6,13 +6,13 @@
     <title>Find Nearest Buildings</title>
   </head>
   <body>
-    <!-- <button
+    <button
       onclick="scrollToTop()"
       id="backToTopBtn"
       style="position: fixed; bottom: 30px; right: 30px"
     >
       back to top
-    </button> -->
+    </button>
     <h1>Find Nearest Buildings</h1>
     <label for="locationInput"
       >Enter Location (Google Maps Link or Coordinates):</label
@@ -27,19 +27,19 @@
     <div id="result" style="display: flex; flex-wrap: wrap"></div>
 
     <script>
-      // // Function to scroll the page back to the top
-      // function scrollToTop() {
-      //   const scrollDuration = 500; // Duration of the scroll animation in milliseconds
-      //   const scrollStep = -window.scrollY / (scrollDuration / 15);
+      // Function to scroll the page back to the top
+      function scrollToTop() {
+        const scrollDuration = 500; // Duration of the scroll animation in milliseconds
+        const scrollStep = -window.scrollY / (scrollDuration / 15);
 
-      //   const scrollInterval = setInterval(function () {
-      //     if (window.scrollY !== 0) {
-      //       window.scrollBy(0, scrollStep);
-      //     } else {
-      //       clearInterval(scrollInterval);
-      //     }
-      //   }, 15);
-      // }
+        const scrollInterval = setInterval(function () {
+          if (window.scrollY !== 0) {
+            window.scrollBy(0, scrollStep);
+          } else {
+            clearInterval(scrollInterval);
+          }
+        }, 15);
+      }
 
       // Xử lý sự kiện nhấn phím Enter trong ô input
       function handleInputKeyDown(event) {
@@ -249,7 +249,11 @@
             location: [24.7558804, 46.7999039],
             image: "../img/56.jpeg",
           },
-
+          {
+            name: "Open 300/600 🇨🇳",
+            location: [24.6685867, 46.7199974],
+            image: "../img/67.jpeg",
+          },
           {
             name: " Russian Open 500/1000 🇹🇭",
             location: [24.7832661, 46.6595612],
@@ -278,7 +282,11 @@
             location: [18.225231, 42.587166],
             image: "../img/40.jpeg",
           },
-
+          {
+            name: "Abha Open 350/600",
+            location: [18.229557, 42.506073],
+            image: "../img/71.jpeg",
+          },
           {
             name: "khobar 26",
             location: [26.289696, 50.186661],
@@ -296,7 +304,11 @@
             location: [26.286106, 50.207184],
             image: "../img/27.jpeg",
           },
-
+          {
+            name: "Khobar Open Russian 600/1200🇹🇭",
+            location: [26.2800598, 50.1994362],
+            image: "../img/72.jpeg",
+          },
           {
             name: "khobar 28",
             location: [26.3034, 50.206261],
@@ -364,7 +376,21 @@
             location: [21.584362, 39.1601028],
             image: "../img/53.jpeg",
           },
-
+          {
+            name: "Jeddah Open 2 lady Việt Nam 🇻🇳🇻🇳🇻🇳 300/600",
+            location: [21.5172183, 39.1601047],
+            image: "../img/68.jpeg",
+          },
+          {
+            name: " Jeddah Open 300/600 🇻🇳🇻🇳🇻🇳 Nhận trẻ OK",
+            location: [21.5151329, 39.1577797],
+            image: "../img/69.jpeg",
+          },
+          {
+            name: " Jeddah Open 300/600 ",
+            location: [21.585001, 39.1858788],
+            image: "../img/70.jpeg",
+          },
           {
             name: "jeddah 35",
             location: [21.514982, 39.157414],
@@ -465,10 +491,6 @@
           },
           // Thêm các tòa nhà khác
         ];
-        const sortedBuildings = sortBuildingsByDistance(
-          customerLocation,
-          buildings
-        );
 
         const sortedBuildings = sortBuildingsByDistance(
           customerLocation,
@@ -477,10 +499,10 @@
 
         // Hiển thị kết quả
         const resultDiv = document.getElementById("result");
-        resultDiv.innerHTML = "<h2>Nearest Buildings:</h2>";
+        resultDiv.innerHTML = "";
 
         // Giới hạn hiển thị chỉ 15 kết quả
-        const maxResults = 15;
+        const maxResults = 30;
         for (let i = 0; i < Math.min(maxResults, sortedBuildings.length); i++) {
           const building = sortedBuildings[i];
           const distance = calculateDistance(
@@ -491,17 +513,17 @@
       <div style="border: 1px solid #333; display: flex; flex-basis: calc(25% - 20px); margin-right: 20px; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-direction: column-reverse;">
         <h3>${building.name}</h3>
         <p>Distance: ${distance.toFixed(2)} km</p>
-        <p>Location: <a target="_blank" href="${locationToGoogleMapsLink(
-          building.location
-        )}">View on Google Maps</a></p>
+      
         <img src="${building.image}" alt="${
             building.name
-          }" width="200" height="300" />
+          }" width="200" height="200" />
       </div>
     `;
         }
       }
-
+      // <p>Location: <a target="_blank" href="${locationToGoogleMapsLink(
+      //     building.location
+      //   )}">View on Google Maps</a></p>
       function locationToGoogleMapsLink(location) {
         return `https://www.google.com/maps/place/${location[0]},${location[1]}`;
       }
