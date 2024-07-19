@@ -973,6 +973,39 @@
 
 
 // jeddah hoful
+
+
+
+      
+{
+            name: "     Jeddah Open 200/400🇻🇳",
+            location: [21.6147146,39.18406],
+            image: "../img/204.jpeg",
+          },
+          
+      
+      
+{
+            name: "     Jeddah Open 200/400🇻🇳",
+            location: [21.5959473,39.1646309],
+            image: "../img/203.jpeg",
+          },
+          
+      
+      
+{
+            name: "  Jeddah Open Russian 500/1000🇳🇱 Khách quen & Già",
+            location: [21.5152798,39.221714],
+            image: "../img/202.jpeg",
+          },
+          
+      
+{
+            name: "   Jeddah Open 300/600 🇨🇳",
+            location: [21.5806971,39.1564703],
+            image: "../img/201.jpeg",
+          },
+          
       
 {
             name: " Jeddah Open 200/400🇻🇳 TOP OK🥰 Trẻ OK",
@@ -1206,7 +1239,42 @@
             image: "../img/196.jpeg",
           },
           
-
+     
+          {
+            name: " riyadh    Arabic Open 500/1000 🇸🇦",
+            location: [24.8004532,46.7688637],
+            image: "../img/197.jpeg",
+          },
+          
+     
+          {
+            name: " riyadh    Russian Open 500/1000 🇳🇱",
+            location: [24.779829,46.6766167],
+            image: "../img/198.jpeg",
+          },
+          
+     
+          {
+            name: " riyadh   Arabic Open 500/1000 🇸🇦",
+            location: [24.7842028,46.7339401],
+            image: "../img/199.jpeg",
+          },
+          
+     
+          {
+            name: " riyadh      Russian Open 500/1000 🇳🇱",
+            location: [24.8043175,46.5902596],
+            image: "../img/200.jpeg",
+          },
+          
+          
+     
+          {
+            name: " riyadh      Russian Open 500/1000 🇳🇱",
+            location: [24.8043175,46.5902596],
+            image: "../img/201.jpeg",
+          },
+          
           ];
 
         const sortedBuildings = sortBuildingsByDistance(
@@ -1218,8 +1286,8 @@
         const resultDiv = document.getElementById("result");
         resultDiv.innerHTML = "";
 
-        // Giới hạn hiển thị chỉ 15 kết quả
-        const maxResults = 30;
+        // Giới hạn hiển thị chỉ 50 kết quả
+        const maxResults = 50;
         for (let i = 0; i < Math.min(maxResults, sortedBuildings.length); i++) {
           const building = sortedBuildings[i];
           const distance = calculateDistance(
